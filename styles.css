@@ -8,7 +8,7 @@
 :root{
     --primary: #4F46E6;
     --accent: #F97316;
-    --background: #F9FAFB;
+    --background: #eef4fc;
     --text: #111827;
     --secondary-text: #6B7280;
     --heading: 'Poppins';
@@ -57,10 +57,24 @@ h1{
 }
 
 .book-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 200px;
     height: 205px;
-    border: 2px solid var(--secondary-text);
+    /* border: 2px solid var(--secondary-text); */
     padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     border-radius: 10px;
     font-family: 'Roboto';
+    background-color: #ffffff;
+}
+
+.book-card button{
+    background-color: var(--primary);
+    color: var(--background);
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
 }
