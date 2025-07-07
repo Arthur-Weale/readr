@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
     <title>Readr Library</title>
@@ -14,49 +20,40 @@
             <button>+ Add new Book</button>
         </div>
         <div class="card-container">
-            <div class="book-card">
+            <!-- <div class="book-card">
                 <h3 class="book-title">The Wall</h3>
-                <p class="book-author">by Arthur Spwein</p>
+                <p class="book-author">By Arthur Spwein</p>
                 <p class="book-pages">300 pages</p>
-                <p class="book-status">✅ Finished</p>
+                <label for="read">Unread <input type="checkbox" id="read"></label>
                 <button class="remove-btn">Remove</button>
-            </div>
-            <div class="book-card">
-                <h3 class="book-title">The Wall</h3>
-                <p class="book-author">by Arthur Spwein</p>
-                <p class="book-pages">300 pages</p>
-                <p class="book-status">✅ Finished</p>
-                <button class="remove-btn">Remove</button>
-            </div>
-            <div class="book-card">
-                <h3 class="book-title">The Wall</h3>
-                <p class="book-author">by Arthur Spwein</p>
-                <p class="book-pages">300 pages</p>
-                <p class="book-status">✅ Finished</p>
-                <button class="remove-btn">Remove</button>
-            </div>
-            <div class="book-card">
-                <h3 class="book-title">The Wall</h3>
-                <p class="book-author">by Arthur Spwein</p>
-                <p class="book-pages">300 pages</p>
-                <p class="book-status">✅ Finished</p>
-                <button class="remove-btn">Remove</button>
-            </div>
-            <div class="book-card">
-                <h3 class="book-title">The Wall</h3>
-                <p class="book-author">by Arthur Spwein</p>
-                <p class="book-pages">300 pages</p>
-                <p class="book-status">✅ Finished</p>
-                <button class="remove-btn">Remove</button>
-            </div>
-            <div class="book-card">
-                <h3 class="book-title">The Wall</h3>
-                <p class="book-author">by Arthur Spwein</p>
-                <p class="book-pages">300 pages</p>
-                <p class="book-status">✅ Finished</p>
-                <button class="remove-btn">Remove</button>
-            </div>
+            </div> -->
         </div>
     </div>
+    <dialog>
+        <form id="book-form">
+            <label>
+                Title:
+                <input type="text" name="title" placeholder="The Wall" required />
+            </label>
+
+            <label>
+                Author:
+                <input type="text" name="author" placeholder="Arthur Spwein" required />
+            </label>
+
+            <label>
+                Pages:
+                <input type="number" name="pages" placeholder="300" required min="1" />
+            </label>
+
+            <label>
+                Finished reading?
+                <input type="checkbox" name="read" />
+            </label>
+
+            <button type="submit">Add Book</button>
+        </form>
+
+    </dialog>
 </body>
 </html>
