@@ -90,24 +90,31 @@ function addBookToLibrary(title, author, pages, read){
 
 addBookToLibrary( 'The wall', 'Arthur Spwein', 300, true)
 addBookToLibrary( 'The wall secrets', 'Arthur Spwein', 360, false)
+addBookToLibrary( 'Kingslaive : The Reckoning', 'Arthur Spwein', 360, false)
 
 /**
- **The displayBook function iterates through
- the myLibrary array and creates a book and appends its content using innerHTML.
- **Remember : data-id=book.id "Use [e.target.dataset.id] to extract the data.id"
+ **The generateBookHTML generates the html for the book.
+  **Remember : data-id=book.id "Use [e.target.dataset.id] to extract the data.id"
+ */
+function generateBookHTML(book){
+    return`
+        <div class="book-card">
+        <h3 class="book-title">Title: ${book.title}</h3>
+        <p class="book-author">Author: ${book.author}</p>
+        <p class="book-pages">Page: ${book.pages}</p>
+        <label for="read">${book.getLabel()} <input type="checkbox" class="readUnreadAttribute" data-id='${book.id}' ${book.getCheckedAttribute(book.id)} ></label>
+        <button class="remove-btn">Remove</button>
+        </div>`;
+}
+
+/**
+ **We separated the presentation and the logic.
+ **The foreach function iterates through the myLibrary array and for each book it adds the book to the innerHTMl.
+ **generateBookHTML(book) receives @param book , which is a book object and builds the UI and returns it , Finally appends the return to the html page.
  */
 function displayBook(){
-    myLibrary.forEach((book)=> {
-        console.log(JSON.stringify(book, null, 2))
-        cardContainer.innerHTML += `
-            <div class="book-card">
-            <h3 class="book-title">Title: ${book.title}</h3>
-            <p class="book-author">Author: ${book.author}</p>
-            <p class="book-pages">Page: ${book.pages}</p>
-            <label for="read">${book.getLabel()} <input type="checkbox" class="readUnreadAttribute" data-id='${book.id}' ${book.getCheckedAttribute(book.id)} ></label>
-            <button class="remove-btn">Remove</button>
-            </div>`;
-    //cardContainer.append(bookCard);
+    myLibrary.forEach(book => {
+        cardContainer.innerHTML += generateBookHTML(book);
     })
 }
 
