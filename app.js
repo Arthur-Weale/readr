@@ -1,5 +1,13 @@
 const cardContainer = document.querySelector('.card-container');//Selects the card container in the html.
 const bookCard = document.querySelector('.book-card');//Selects bookcard class in the html
+const dialog = document.querySelector('dialog');
+const inputs = document.querySelectorAll('input');
+const addBook = document.querySelector('.add-book');
+
+
+addBook.addEventListener('click', ()=> {
+    dialog.showModal();
+})
 
 /** 
 **-When we create a book or a 
@@ -8,7 +16,7 @@ const bookCard = document.querySelector('.book-card');//Selects bookcard class i
 **thats why we create an array 
 **to store the books and keep them tracked
 */
-const myLibrary = []; 
+let myLibrary = []; 
 
 
 /**
@@ -103,7 +111,7 @@ function generateBookHTML(book){
         <p class="book-author">Author: ${book.author}</p>
         <p class="book-pages">Page: ${book.pages}</p>
         <label for="read">${book.getLabel()} <input type="checkbox" class="readUnreadAttribute" data-id='${book.id}' ${book.getCheckedAttribute(book.id)} ></label>
-        <button class="remove-btn">Remove</button>
+        <button class="remove-btn" data-id='${book.id}'>Remove</button>
         </div>`;
 }
 
@@ -128,20 +136,77 @@ function displayBook(){
  */
 function bindCheckboxListeners(){
     document.querySelectorAll('.readUnreadAttribute').forEach(checkbox =>{
-    checkbox.addEventListener('change', (e)=> {
-        
-                const bookId = e.target.dataset.id;
-                const book = myLibrary.find(book => book.id === bookId)
-                if(book) book.toggleReadState(bookId); //If the above condition is true then we pass the bookId yo toggleReadState.
-                cardContainer.innerHTML = ''; //This will reset the and empty the cardContainer
-                //book.toggleReadState(bookId);
+        checkbox.addEventListener('change', (e)=> {
+            const bookId = e.target.dataset.id;
+            const book = myLibrary.find(book => book.id === bookId)
+            if(book) book.toggleReadState(bookId); //If the above condition is true then we pass the bookId yo toggleReadState.
+            cardContainer.innerHTML = ''; //This will reset the and empty the cardContainer
+            //book.toggleReadState(bookId);
 
-                displayBook() //Will call displayBook to display the books which in the process will invoke other functions that are reliant on it such as prototype functions.
-                bindCheckboxListeners() //Since we clear the DOM using innerHTML="", then we need to rebind the  listeners. This will all be done when the bindCheckboxListeners function is invoked
-            })
+            displayBook() //Will call displayBook to display the books which in the process will invoke other functions that are reliant on it such as prototype functions.
+            bindCheckboxListeners() //Since we clear the DOM using innerHTML="", then we need to rebind the  listeners. This will all be done when the bindCheckboxListeners function is invoked
+        })
         } )
     }
 
-displayBook() //This invokes the first time displayBook when the DOM renders for the first time.
-bindCheckboxListeners()// Binds the listeners to toggle elements when the DOM renders for the first time.
+// displayBook() //This invokes the first time displayBook when the DOM renders for the first time.
+// bindCheckboxListeners()// Binds the listeners to toggle elements when the DOM renders for the first time
+// rebindRemoveListener()
 
+function isValid(){
+    const bookTitle = document.getElementById('book-title').value;
+    const bookAuthor = document.getElementById('book-author').value;
+    const bookPages = document.getElementById('book-pages').value;
+    const bookCheck = document.getElementById('book-check').checked;
+
+    if(bookTitle && bookAuthor && bookPages && bookCheck ){
+        console.log(bookTitle, bookAuthor, bookPages, bookCheck)
+        return addBookToLibrary(bookTitle, bookAuthor, bookPages, bookCheck)
+    }else if(bookTitle && bookAuthor && bookPages && bookCheck === false){
+        console.log(bookTitle, bookAuthor, bookPages, bookCheck)
+        return addBookToLibrary(bookTitle, bookAuthor, bookPages, bookCheck)
+    }
+}
+
+const processData = ()=> { 
+    if(isValid()) return isValid();
+    document.getElementById('book-title').value = '';
+    document.getElementById('book-author').value = '';
+    document.getElementById('book-pages').value = '';
+    document.getElementById('book-check').checked ='';
+}
+
+document.querySelector('.submit-button').addEventListener('click', (e) => {
+    cardContainer.innerHTML= '';
+    e.preventDefault();
+    processData();
+    dialog.close()
+    displayBook() //This invokes the first time displayBook when the DOM renders for the first time.
+    bindCheckboxListeners()
+
+});
+
+document.addEventListener('DOMContentLoaded', ()=> {
+    console.log(myLibrary);
+})
+
+function rebindRemoveListener(){
+    document.querySelectorAll('.remove-btn').forEach(button => {
+    button.addEventListener('click', (e)=> {
+        
+        console.log('i have been clicked')
+        const bookID = e.currentTarget.dataset.id;
+        console.log(bookID);
+        myLibrary = myLibrary.filter(book=> bookID !== book.id)
+        cardContainer.innerHTML = '';
+        displayBook()
+        bindCheckboxListeners()
+        rebindRemoveListener()
+    
+})
+})
+}
+
+displayBook() //This invokes the first time displayBook when the DOM renders for the first time.
+bindCheckboxListeners()// Binds the listeners to toggle elements when the DOM renders for the first time
+rebindRemoveListener()
