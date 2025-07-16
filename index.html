@@ -17,7 +17,7 @@
     <div class="ui-container">
         <div class="top-container">
             <h1>READR LIBRARY</h1>
-            <button>+ Add new Book</button>
+            <button class="add-book">+ Add new Book</button>
         </div>
         <div class="card-container">
             <!-- <div class="book-card">
@@ -30,28 +30,36 @@
         </div>
     </div>
     <dialog>
-        <form id="book-form">
-            <label>
-                Title:
-                <input type="text" name="title" placeholder="The Wall" required />
-            </label>
+        <form id="book-form" method="get">
+            <div class="form-control">
+                <label>
+                    Title:
+                </label>
+                <input type="text" id="book-title" name="title" placeholder="The Wall" required />
+            </div>
 
-            <label>
-                Author:
-                <input type="text" name="author" placeholder="Arthur Spwein" required />
-            </label>
+            <div class="form-control">
+                <label>
+                    Author:
+                </label>
+                <input type="text" id="book-author" name="author" placeholder="Arthur Spwein" required />
+            </div>
 
-            <label>
-                Pages:
-                <input type="number" name="pages" placeholder="300" required min="1" />
-            </label>
+            <div class="form-control">
+                <label>
+                    Pages:
+                </label>
+                <input type="number" id="book-pages" name="pages" placeholder="300" required min="1" />
+            </div>
 
-            <label>
-                Finished reading?
-                <input type="checkbox" name="read" />
-            </label>
+            <div class="form-control">
+                <label>
+                    Finished reading?
+                </label>
+                <input type="checkbox" id="book-check" name="read" class="checkbox"/>
+            </div>
 
-            <button type="submit">Add Book</button>
+            <button class="submit-button" type="submit">Add Book</button>
         </form>
 
     </dialog>
